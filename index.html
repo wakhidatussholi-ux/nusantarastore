@@ -124,7 +124,7 @@
                     </button>
                     <button id="nav-admin-btn" onclick="handleAdminNavClick()" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 shadow-sm transition flex items-center gap-2">
                         <i class="fa-solid fa-user-shield"></i>
-                        <span id="nav-admin-text">Admin Login</span>
+                        <span id="nav-admin-text">Login</span>
                     </button>
                 </div>
             </div>
@@ -153,9 +153,12 @@
                             <span>Jelajahi Katalog</span>
                             <i class="fa-solid fa-arrow-down"></i>
                         </a>
-                        <button onclick="navigateTo('/login')" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/15 transition">
-                            Kelola Toko (Admin)
+ <!---
+                          <button onclick="navigateTo('/login')" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/15 transition">
+                            Kelola Toko (Admin) 
+                             
                         </button>
+                    -->
                     </div>
                 </div>
             </div>
@@ -257,7 +260,7 @@
                 <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <h2 class="text-2xl font-extrabold text-slate-900">Login Admin Toko</h2>
+                <h2 class="text-2xl font-extrabold text-slate-900">Login Admin </h2>
                 <p class="text-sm text-slate-500 mt-1">Masuk ke dashboard untuk mengelola katalog produk & foto studio.</p>
             </div>
 
@@ -265,20 +268,21 @@
             <div class="mb-6 p-4 rounded-2xl bg-indigo-50/80 border border-indigo-100 text-xs text-indigo-900">
                 <div class="flex items-center gap-2 font-bold text-indigo-700 mb-1">
                     <i class="fa-solid fa-circle-info"></i>
-                    <span>Akun Demo Admin:</span>
+                    <span>
                 </div>
+    <!---            
                 <div class="flex items-center justify-between mt-1.5 bg-white px-3 py-2 rounded-xl border border-indigo-100">
                     <span>Username: <strong class="font-mono text-indigo-700">admin</strong></span>
                     <span>Password: <strong class="font-mono text-indigo-700">admin123</strong></span>
                 </div>
             </div>
-
+        -->
             <form id="login-form" class="space-y-5">
                 <div>
                     <label for="login-username" class="block text-sm font-semibold text-slate-700 mb-1.5">Username</label>
                     <div class="relative">
-                        <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="text" id="login-username" required value="admin" placeholder="Masukkan username"
+                        <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>                 
+                        <input type="text" id="login-usernaame" required autocomplate="off" placeholder="Masukkan username"
                             class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-sm outline-none transition">
                     </div>
                 </div>
@@ -286,14 +290,13 @@
                     <label for="login-password" class="block text-sm font-semibold text-slate-700 mb-1.5">Password</label>
                     <div class="relative">
                         <i class="fa-solid fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input type="password" id="login-password" required value="admin123" placeholder="Masukkan password"
+                        <input type="password" id="login-password" required autocomplete="new-password" placeholder="Masukkan password"
                             class="w-full pl-10 pr-11 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-sm outline-none transition">
                         <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                             <i id="eye-icon" class="fa-solid fa-eye text-sm"></i>
                         </button>
                     </div>
                 </div>
-
                 <div id="login-error-box" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium flex items-center gap-2">
                     <i class="fa-solid fa-circle-exclamation"></i>
                     <span>Username atau password salah! Gunakan admin / admin123.</span>
@@ -312,7 +315,6 @@
             </div>
         </div>
     </section>
-
     <!-- ==================== VIEW 3: DASHBOARD ADMIN ==================== -->
     <section id="view-admin" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <!-- Header Dashboard -->
@@ -827,9 +829,9 @@
 
             // Update status tombol navbar
             if (isAdminLoggedIn()) {
-                navAdminText.textContent = 'Dashboard Admin';
             } else {
-                navAdminText.textContent = 'Admin Login';
+                navAdminText.textContent = 'Login';
+               navAdminText.classList.add('text-xs'); 
             }
 
             // Sembunyikan semua view terlebih dahulu
@@ -1045,18 +1047,12 @@
         // ==================== 4. LOGIN ADMIN & DASHBOARD ====================
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value.trim();
             const errorBox = document.getElementById('login-error-box');
 
-            if (username === 'admin' && password === 'admin123') {
                 errorBox.classList.add('hidden');
                 localStorage.setItem(STORAGE_KEYS.ADMIN_AUTH, 'true');
                 showToast('Berhasil masuk sebagai Admin!', 'success');
                 navigateTo('/admin');
-            } else {
-                errorBox.classList.remove('hidden');
-            }
         });
 
         function togglePasswordVisibility() {
