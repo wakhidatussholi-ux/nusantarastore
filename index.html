@@ -28,7 +28,7 @@
         };
     </script>
     <style>
-        /* Latar kotak-kotak transparan untuk pratinjau hapus background otomatis */
+        /* Latar kotak-kotak transparan untuk pratinjau studio foto & hapus background */
         .checkerboard-bg {
             background-color: #f8fafc;
             background-image:
@@ -51,19 +51,35 @@
                 <div class="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-2xs group-hover:bg-indigo-600 transition-colors">
                     <i class="fa-solid fa-store text-sm"></i>
                 </div>
-                <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900">
-                    Nusantara<span class="text-indigo-600">Store</span>
-                </span>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 leading-none">
+                        Nusantara<span class="text-indigo-600">Store</span>
+                    </span>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-400 mt-0.5">Katalog Resmi</span>
+                </div>
             </a>
 
-            <!-- Menu Navigasi Utama -->
-            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-                <a href="#profil" onclick="scrollToSection('profil', event)" class="hover:text-indigo-600 transition-colors py-1">Profil</a>
-                <a href="#produk" onclick="scrollToSection('produk', event)" class="hover:text-indigo-600 transition-colors py-1">Produk</a>
-                <a href="#kontak" onclick="scrollToSection('kontak', event)" class="hover:text-indigo-600 transition-colors py-1">Hubungi Kami</a>
+            <!-- Menu Navigasi Utama (Desktop) -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#profil" onclick="scrollToSection('profil', event)" class="inline-flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-1">
+                    <i class="fa-solid fa-house text-xs text-indigo-500/80"></i>
+                    <span>Profil</span>
+                </a>
+                <a href="#tentang-kami" onclick="scrollToSection('tentang-kami', event)" class="inline-flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-1">
+                    <i class="fa-solid fa-store text-xs text-indigo-500/80"></i>
+                    <span>Tentang Toko Kami</span>
+                </a>
+                <a href="#produk" onclick="scrollToSection('produk', event)" class="inline-flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-1">
+                    <i class="fa-solid fa-bag-shopping text-xs text-indigo-500/80"></i>
+                    <span>Produk</span>
+                </a>
+                <a href="#hubungi-kami" onclick="scrollToSection('hubungi-kami', event)" class="inline-flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-1">
+                    <i class="fa-brands fa-whatsapp text-xs text-emerald-600"></i>
+                    <span>Hubungi Kami</span>
+                </a>
             </nav>
 
-            <!-- Tombol Login Kecil di Pojok Kanan Atas -->
+            <!-- Tombol Login / Dashboard Kecil di Pojok Kanan Atas -->
             <div class="flex items-center gap-2">
                 <button
                     type="button"
@@ -71,24 +87,37 @@
                     onclick="handleNavLoginClick()"
                     class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-indigo-600 text-white font-medium text-xs transition-all shadow-2xs"
                 >
-                    <i class="fa-solid fa-user-shield text-[11px]"></i>
+                    <i id="nav-admin-icon" class="fa-solid fa-user-shield text-[11px]"></i>
                     <span id="nav-admin-text" class="text-xs">Login</span>
                 </button>
             </div>
         </div>
 
         <!-- Menu Navigasi Mobile -->
-        <div class="md:hidden border-t border-slate-100 bg-white px-4 py-2 flex items-center justify-around text-xs font-medium text-slate-600">
-            <a href="#profil" onclick="scrollToSection('profil', event)" class="hover:text-indigo-600 py-1 px-2 rounded-lg">Profil</a>
-            <a href="#produk" onclick="scrollToSection('produk', event)" class="hover:text-indigo-600 py-1 px-2 rounded-lg">Produk</a>
-            <a href="#kontak" onclick="scrollToSection('kontak', event)" class="hover:text-indigo-600 py-1 px-2 rounded-lg">Hubungi Kami</a>
+        <div class="md:hidden border-t border-slate-100 bg-white px-2 py-2 flex items-center justify-around text-[11px] font-medium text-slate-600">
+            <a href="#profil" onclick="scrollToSection('profil', event)" class="inline-flex items-center gap-1 hover:text-indigo-600 py-1 px-2 rounded-lg">
+                <i class="fa-solid fa-house text-[10px] text-indigo-500"></i>
+                <span>Profil</span>
+            </a>
+            <a href="#tentang-kami" onclick="scrollToSection('tentang-kami', event)" class="inline-flex items-center gap-1 hover:text-indigo-600 py-1 px-2 rounded-lg">
+                <i class="fa-solid fa-store text-[10px] text-indigo-500"></i>
+                <span>Tentang Kami</span>
+            </a>
+            <a href="#produk" onclick="scrollToSection('produk', event)" class="inline-flex items-center gap-1 hover:text-indigo-600 py-1 px-2 rounded-lg">
+                <i class="fa-solid fa-bag-shopping text-[10px] text-indigo-500"></i>
+                <span>Produk</span>
+            </a>
+            <a href="#hubungi-kami" onclick="scrollToSection('hubungi-kami', event)" class="inline-flex items-center gap-1 hover:text-indigo-600 py-1 px-2 rounded-lg">
+                <i class="fa-brands fa-whatsapp text-[10px] text-emerald-600"></i>
+                <span>Hubungi Kami</span>
+            </a>
         </div>
     </header>
 
     <!-- ==================== VIEW 1: BERANDA KATALOG ==================== -->
     <main id="view-catalog" class="flex-1">
-        <!-- HERO BANNER ESTETIK & SEIMBANG -->
-        <section class="relative overflow-hidden bg-slate-900 text-white">
+        <!-- HERO BANNER (#profil) DENGAN LATAR GAMBAR & BILAH SOROTAN HORIZONTAL -->
+        <section id="profil" class="relative overflow-hidden bg-slate-900 text-white scroll-mt-16">
             <img
                 id="hero-bg-img"
                 src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=80"
@@ -106,23 +135,39 @@
                     <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white mb-4">
                         Kurasi Produk Berkualitas untuk Aktivitas Harian Anda
                     </h1>
-                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-7">
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-8">
                         Jelajahi produk pilihan dengan tampilan katalog yang rapi, jelas, dan langsung terhubung ke WhatsApp toko kami.
                     </p>
-                    <div class="flex flex-wrap items-center gap-3">
-                        <a href="#produk" onclick="scrollToSection('produk', event)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm shadow-md transition-all">
-                            <i class="fa-solid fa-bag-shopping"></i> Jelajahi Produk
-                        </a>
-                        <a href="#profil" onclick="scrollToSection('profil', event)" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/25 backdrop-blur-xs font-semibold text-xs sm:text-sm transition-all">
-                            <i class="fa-solid fa-store"></i> Tentang Toko
-                        </a>
+                </div>
+
+                <!-- Bilah Horizontal Sorotan dengan Garis Atas & Pemisah Vertikal -->
+                <div class="pt-6 border-t border-white/15 max-w-2xl">
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs sm:text-sm font-semibold text-white/95">
+                        <div class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-slate-300 text-sm"></i>
+                            <span>Produk Pilihan</span>
+                        </div>
+
+                        <span class="hidden sm:inline-block h-4 w-px bg-white/25" aria-hidden="true"></span>
+
+                        <div class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-award text-slate-300 text-sm"></i>
+                            <span>Kualitas Terjamin</span>
+                        </div>
+
+                        <span class="hidden sm:inline-block h-4 w-px bg-white/25" aria-hidden="true"></span>
+
+                        <div class="inline-flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-slate-300 text-sm"></i>
+                            <span>Pesan Mudah</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEKSI 1: PROFIL / TENTANG TOKO KAMI (ESTETIK, TIDAK RAMAI, BISA DIEDIT DARI ADMIN) -->
-        <section id="profil" class="py-14 sm:py-16 bg-[#faf8f5] border-b border-stone-200/80 scroll-mt-16">
+        <!-- SEKSI 2: TENTANG TOKO KAMI (#tentang-kami) -->
+        <section id="tentang-kami" class="py-14 sm:py-16 bg-[#faf8f5] border-b border-stone-200/80 scroll-mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white rounded-3xl border border-stone-200/80 shadow-2xs p-6 sm:p-9">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -171,10 +216,9 @@
             </div>
         </section>
 
-        <!-- SEKSI 2: PRODUK (GAYA KATALOG KARTU PASTEL & PIL KATEGORI) -->
+        <!-- SEKSI 3: PRODUK (GAYA KATALOG KARTU PASTEL & PIL KATEGORI) -->
         <section id="produk" class="py-14 sm:py-16 bg-slate-50 scroll-mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Judul Seksi & Kotak Pencarian -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
                     <div>
                         <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Katalog Produk</span>
@@ -219,8 +263,8 @@
             </div>
         </section>
 
-        <!-- SEKSI 3: HUBUNGI KAMI (TULISAN WHATSAPP RINGKAS & RAPI) -->
-        <section id="kontak" class="py-10 sm:py-12 bg-white border-t border-slate-200/80 scroll-mt-16">
+        <!-- SEKSI 4: HUBUNGI KAMI (TULISAN WHATSAPP RINGKAS & RAPI) -->
+        <section id="hubungi-kami" class="py-10 sm:py-12 bg-white border-t border-slate-200/80 scroll-mt-16">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-slate-900 rounded-2xl text-white px-6 py-6 sm:px-8 sm:py-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5 shadow-sm">
                     <div>
@@ -241,7 +285,7 @@
                         class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#22c55e] hover:bg-emerald-500 text-white font-semibold text-xs transition-all shrink-0 shadow-2xs"
                     >
                         <i class="fa-brands fa-whatsapp text-sm"></i>
-                        <span class="text-xs">Chat WhatsApp</span>
+                        <span class="text-xs">Hubungi Kami via WhatsApp</span>
                     </a>
                 </div>
             </div>
@@ -512,7 +556,7 @@
     <!-- ==================== MODAL TAMBAH / EDIT PRODUK + STUDIO FOTO ==================== -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-xs p-3 sm:p-5 overflow-y-auto">
         <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto">
-            <!-- Header Modal Sesuai Referensi -->
+            <!-- Header Modal -->
             <div class="px-6 py-4 bg-white border-b border-slate-200/80 flex items-center justify-between gap-4">
                 <div class="flex items-center gap-3.5">
                     <div class="w-11 h-11 rounded-2xl bg-[#5a46e6] text-white flex items-center justify-center shadow-sm shrink-0">
@@ -742,7 +786,7 @@
                     </div>
                 </div>
 
-                <!-- Footer Modal Sesuai Referensi -->
+                <!-- Footer Modal -->
                 <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end gap-3">
                     <button
                         type="button"
@@ -1073,11 +1117,18 @@
             const viewLogin = document.getElementById('view-login');
             const viewAdmin = document.getElementById('view-admin');
             const navAdminText = document.getElementById('nav-admin-text');
+            const navAdminIcon = document.getElementById('nav-admin-icon');
 
             if (navAdminText) {
-                navAdminText.textContent = 'Login';
+                const loggedIn = isAdminLoggedIn();
+                navAdminText.textContent = loggedIn ? 'Dashboard' : 'Login';
                 navAdminText.classList.remove('text-sm');
                 navAdminText.classList.add('text-xs');
+                if (navAdminIcon) {
+                    navAdminIcon.className = loggedIn
+                        ? 'fa-solid fa-gauge-high text-[11px]'
+                        : 'fa-solid fa-user-shield text-[11px]';
+                }
             }
 
             applyHomeSettings();
