@@ -510,110 +510,253 @@
     </section>
 
     <!-- ==================== MODAL TAMBAH / EDIT PRODUK + STUDIO FOTO ==================== -->
-    <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4 overflow-y-auto">
-        <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto">
-            <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                <h3 id="modal-title" class="text-lg font-extrabold text-slate-900">Tambah Produk Baru</h3>
-                <button type="button" onclick="closeProductModal()" class="w-8 h-8 rounded-xl bg-white border border-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
+    <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-xs p-3 sm:p-5 overflow-y-auto">
+        <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto">
+            <!-- Header Modal Sesuai Referensi -->
+            <div class="px-6 py-4 bg-white border-b border-slate-200/80 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-[#5a46e6] text-white flex items-center justify-center shadow-sm shrink-0">
+                        <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Tambah Produk Baru</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Lengkapi detail produk &amp; edit foto dengan fitur Crop dan Hapus Background Otomatis</p>
+                    </div>
+                </div>
+                <button
+                    type="button"
+                    onclick="closeProductModal()"
+                    aria-label="Tutup modal produk"
+                    class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-colors shrink-0"
+                >
+                    <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
             </div>
 
-            <form id="product-form" class="p-6 max-h-[82vh] overflow-y-auto">
+            <form id="product-form" class="p-5 sm:p-6 max-h-[82vh] overflow-y-auto">
                 <input type="hidden" id="prod-id">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <!-- Kolom Kiri: Informasi Produk -->
+                <input type="hidden" id="prod-wa">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    <!-- Kolom Kiri: Form Detail Produk & Sumber Foto -->
                     <div class="lg:col-span-5 space-y-4">
                         <div>
-                            <label for="prod-name" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Produk *</label>
-                            <input type="text" id="prod-name" required placeholder="Contoh: SoundPro ANC Wireless Headphone" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <label for="prod-name" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                NAMA PRODUK <span class="text-rose-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="prod-name"
+                                required
+                                placeholder="Contoh: Headphone Wireless ANC Pro"
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
+                            >
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
-                                <label for="prod-category" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kategori *</label>
-                                <input type="text" id="prod-category" list="category-suggestions" required placeholder="Elektronik" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                                <label for="prod-category" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                    KATEGORI <span class="text-rose-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="prod-category"
+                                    list="category-suggestions"
+                                    required
+                                    placeholder="Elektronik"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
+                                >
                                 <datalist id="category-suggestions">
-                                    <option value="Elektronik">
-                                    <option value="Fashion">
-                                    <option value="Aksesoris">
+                                    <option value="Elektronik"></option>
+                                    <option value="Fashion"></option>
+                                    <option value="Aksesoris"></option>
                                 </datalist>
                             </div>
                             <div>
-                                <label for="prod-price" class="block text-xs font-bold text-slate-700 uppercase mb-1">Harga (Rp) *</label>
-                                <input type="number" id="prod-price" required min="0" placeholder="899000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                                <label for="prod-price" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                    HARGA (RP) <span class="text-rose-500">*</span>
+                                </label>
+                                <input
+                                    type="number"
+                                    id="prod-price"
+                                    required
+                                    min="0"
+                                    placeholder="450000"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
+                                >
                             </div>
                         </div>
+
                         <div>
-                            <label for="prod-wa" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nomor WhatsApp Tujuan *</label>
-                            <input type="text" id="prod-wa" required placeholder="6281234567890" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <label for="prod-desc" class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                DESKRIPSI PRODUK <span class="text-rose-500">*</span>
+                            </label>
+                            <textarea
+                                id="prod-desc"
+                                rows="3"
+                                required
+                                placeholder="Jelaskan keunggulan, spesifikasi, dan ukuran produk..."
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none"
+                            ></textarea>
                         </div>
+
+                        <!-- Sumber Foto Produk + Sampel Uji Coba -->
                         <div>
-                            <label for="prod-desc" class="block text-xs font-bold text-slate-700 uppercase mb-1">Deskripsi Produk *</label>
-                            <textarea id="prod-desc" rows="3" required placeholder="Tulis deskripsi singkat produk..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+                            <span class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                                SUMBER FOTO PRODUK
+                            </span>
+                            <label
+                                for="prod-image-input"
+                                class="cursor-pointer w-full rounded-2xl border-2 border-dashed border-indigo-200 hover:border-indigo-400 bg-indigo-50/40 hover:bg-indigo-50/80 transition-all p-4 flex flex-col items-center justify-center text-center"
+                            >
+                                <div class="w-9 h-9 rounded-full bg-indigo-100 text-[#5a46e6] flex items-center justify-center mb-1.5">
+                                    <i class="fa-solid fa-cloud-arrow-up text-sm"></i>
+                                </div>
+                                <p class="text-xs font-bold text-[#5a46e6]">Klik untuk Upload Foto (JPG, PNG, WebP)</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">Atau pilih gambar sampel uji coba di bawah</p>
+                                <input type="file" id="prod-image-input" accept="image/jpeg,image/png,image/webp,image/*" onchange="handleImageUpload(event)" class="hidden">
+                            </label>
+
+                            <!-- Sampel Gambar Uji Coba Pelatihan -->
+                            <div class="mt-2.5 flex items-center justify-between gap-2">
+                                <span class="text-[11px] font-medium text-slate-500 shrink-0">Sampel uji coba:</span>
+                                <div id="studio-sample-list" class="grid grid-cols-4 gap-1.5 flex-1">
+                                    <!-- Diisi oleh JavaScript -->
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Kolom Kanan: Studio Edit Foto (Crop & Hapus Background Otomatis) -->
-                    <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-4 border border-slate-200/80 flex flex-col">
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-slate-700">
-                                <i class="fa-solid fa-wand-magic-sparkles text-indigo-600 mr-1"></i> Studio Foto Produk
+                    <!-- Kolom Kanan: Panel Studio Foto Produk -->
+                    <div class="lg:col-span-7 bg-[#f8fafc] rounded-2xl p-4 sm:p-5 border border-slate-200/80 flex flex-col">
+                        <!-- Baris Atas Studio: Badge & Tombol Undo / Reset Asli -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-50 text-[#5a46e6] text-xs font-bold">
+                                <i class="fa-solid fa-crop-simple text-[11px]"></i>
+                                <span>Studio Foto Produk</span>
                             </span>
-                            <label class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition-all">
-                                <i class="fa-solid fa-upload"></i> Pilih Foto
-                                <input type="file" id="prod-image-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
-                            </label>
-                        </div>
 
-                        <div class="relative w-full h-64 rounded-xl overflow-hidden border border-slate-300 checkerboard-bg flex items-center justify-center">
-                            <img id="studio-preview-img" src="" alt="Pratinjau Foto Produk" class="max-h-full max-w-full object-contain">
-                        </div>
-
-                        <!-- Kontrol Cropper -->
-                        <div id="crop-controls" class="hidden mt-3 p-3 rounded-xl bg-white border border-slate-200 flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-1.5 text-xs">
-                                <span class="font-semibold text-slate-600 mr-1">Rasio:</span>
-                                <button type="button" onclick="setCropAspect(NaN)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-medium">Bebas</button>
-                                <button type="button" onclick="setCropAspect(1)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-medium">1:1</button>
-                                <button type="button" onclick="setCropAspect(4/3)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-medium">4:3</button>
-                                <button type="button" onclick="rotateCropper(90)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-medium" title="Putar 90 derajat">
-                                    <i class="fa-solid fa-rotate-right"></i>
-                                </button>
-                            </div>
                             <div class="flex items-center gap-2">
-                                <button type="button" onclick="cancelCropMode()" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 text-xs font-semibold">Batal</button>
-                                <button type="button" onclick="applyCrop()" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold">Terapkan Crop</button>
+                                <button
+                                    type="button"
+                                    id="btn-studio-undo"
+                                    onclick="undoStudioImage()"
+                                    disabled
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-45 disabled:cursor-not-allowed text-xs font-semibold transition-all"
+                                >
+                                    <i class="fa-solid fa-rotate-left text-[11px]"></i>
+                                    <span>Undo</span>
+                                </button>
+                                <button
+                                    type="button"
+                                    id="btn-studio-reset"
+                                    onclick="resetStudioImage()"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold transition-all"
+                                >
+                                    <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
+                                    <span>Reset Asli</span>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Kontrol Hapus Background Otomatis -->
-                        <div id="bg-remove-controls" class="mt-3 p-3 rounded-xl bg-white border border-slate-200 space-y-2">
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <div class="flex items-center gap-2">
-                                    <button type="button" onclick="startCropMode()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold">
-                                        <i class="fa-solid fa-crop-simple"></i> Crop Foto
-                                    </button>
-                                    <button type="button" onclick="autoRemoveBackground()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold">
-                                        <i class="fa-solid fa-eraser"></i> Hapus Background Otomatis
-                                    </button>
+                        <!-- Area Pratinjau Checkerboard -->
+                        <div class="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-slate-200/90 checkerboard-bg flex items-center justify-center">
+                            <div id="studio-empty-placeholder" class="flex flex-col items-center justify-center text-center px-4 pointer-events-none select-none">
+                                <div class="w-11 h-11 rounded-xl bg-slate-200/80 text-slate-500 flex items-center justify-center mb-2 text-lg">
+                                    <i class="fa-regular fa-image"></i>
                                 </div>
-                                <button type="button" onclick="resetStudioImage()" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium">
-                                    <i class="fa-solid fa-rotate-left"></i> Reset
+                                <p class="text-xs font-semibold text-slate-500">Upload foto atau pilih sampel untuk mulai mengedit</p>
+                            </div>
+                            <img id="studio-preview-img" src="" alt="Pratinjau Foto Produk" class="hidden max-h-full max-w-full object-contain">
+                        </div>
+
+                        <!-- Tab Switcher Pill Bar: 1. Potong (Crop) & 2. Hapus Background -->
+                        <div class="mt-3.5 bg-slate-200/75 p-1 rounded-xl grid grid-cols-2 gap-1">
+                            <button
+                                type="button"
+                                id="tab-studio-crop"
+                                onclick="switchStudioTab('crop')"
+                                class="py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all bg-white text-slate-900 shadow-2xs"
+                            >
+                                <i class="fa-solid fa-crop text-[11px] text-[#5a46e6]"></i>
+                                <span>1. Potong (Crop)</span>
+                            </button>
+                            <button
+                                type="button"
+                                id="tab-studio-bg"
+                                onclick="switchStudioTab('bg')"
+                                class="py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-slate-600 hover:text-slate-900"
+                            >
+                                <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
+                                <span>2. Hapus Background</span>
+                            </button>
+                        </div>
+
+                        <!-- Panel Kontrol Mode 1: Potong (Crop) -->
+                        <div id="panel-studio-crop" class="mt-3 p-3.5 rounded-xl bg-white border border-slate-200/80 flex flex-wrap items-center justify-between gap-2.5">
+                            <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                                <span class="text-[11px] font-semibold text-slate-500 mr-1">Rasio:</span>
+                                <button type="button" onclick="setCropAspect(1)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 font-semibold text-slate-700 transition-colors">1:1</button>
+                                <button type="button" onclick="setCropAspect(4/3)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 font-semibold text-slate-700 transition-colors">4:3</button>
+                                <button type="button" onclick="setCropAspect(NaN)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 font-semibold text-slate-700 transition-colors">Bebas</button>
+                                <button type="button" onclick="rotateCropper(90)" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 font-semibold text-slate-700 transition-colors" title="Putar 90 derajat">
+                                    <i class="fa-solid fa-rotate-right"></i> 90°
                                 </button>
                             </div>
-                            <div class="flex items-center gap-3 pt-1">
-                                <label for="bg-tolerance" class="text-[11px] font-medium text-slate-500 shrink-0">Toleransi Hapus BG:</label>
-                                <input type="range" id="bg-tolerance" min="10" max="100" value="42" class="w-full accent-indigo-600 h-1.5 bg-slate-200 rounded-lg cursor-pointer">
-                                <span id="bg-tolerance-val" class="text-[11px] font-bold text-slate-700 w-7 text-right">42</span>
+                            <button
+                                type="button"
+                                onclick="applyCrop()"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#5a46e6] hover:bg-indigo-700 text-white text-xs font-bold shadow-2xs transition-colors"
+                            >
+                                <i class="fa-solid fa-check"></i> Terapkan Crop
+                            </button>
+                        </div>
+
+                        <!-- Panel Kontrol Mode 2: Hapus Background Otomatis -->
+                        <div id="panel-studio-bg" class="hidden mt-3 p-3.5 rounded-xl bg-white border border-slate-200/80 space-y-3">
+                            <div class="flex items-center justify-between gap-3">
+                                <label for="bg-tolerance" class="text-xs font-semibold text-slate-600 shrink-0">
+                                    Toleransi Warna Tepi: <span id="bg-tolerance-val" class="font-bold text-[#5a46e6]">42</span>
+                                </label>
+                                <input
+                                    type="range"
+                                    id="bg-tolerance"
+                                    min="10"
+                                    max="100"
+                                    value="42"
+                                    oninput="document.getElementById('bg-tolerance-val').textContent = this.value"
+                                    class="w-full max-w-xs accent-[#5a46e6] h-1.5 bg-slate-200 rounded-lg cursor-pointer"
+                                >
+                            </div>
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] text-slate-400">Menghapus latar belakang tepi secara otomatis ke transparan.</span>
+                                <button
+                                    type="button"
+                                    onclick="autoRemoveBackground()"
+                                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-2xs transition-colors shrink-0"
+                                >
+                                    <i class="fa-solid fa-eraser"></i> Terapkan Hapus Background
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-                    <button type="button" onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm">Batal</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-md">
-                        <i class="fa-solid fa-floppy-disk mr-1.5"></i> Simpan Produk
+                <!-- Footer Modal Sesuai Referensi -->
+                <div class="mt-6 pt-4 border-t border-slate-200/80 flex items-center justify-end gap-3">
+                    <button
+                        type="button"
+                        onclick="closeProductModal()"
+                        class="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition-colors"
+                    >
+                        Batal
+                    </button>
+                    <button
+                        type="submit"
+                        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#5a46e6] hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all"
+                    >
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Simpan Produk ke Katalog</span>
                     </button>
                 </div>
             </form>
@@ -777,7 +920,16 @@
         let activeCategory = 'ALL';
         let cropperInstance = null;
         let originalStudioImage = '';
+        let studioHistory = [];
+        let activeStudioTab = 'crop';
         let productToDeleteId = null;
+
+        const TRAINING_SAMPLES = [
+            { label: 'Headphone', kind: 'headphone' },
+            { label: 'Sneakers', kind: 'sneaker' },
+            { label: 'Smartwatch', kind: 'smartwatch' },
+            { label: 'Backpack', kind: 'backpack' }
+        ];
 
         // ==================== 2. FUNGSI BANTUAN DATA ====================
         function normalizeWaNumber(raw) {
@@ -1300,8 +1452,134 @@
         });
 
         // ==================== 7. MODAL PRODUK & STUDIO FOTO ====================
+        function renderStudioSampleButtons() {
+            const sampleContainer = document.getElementById('studio-sample-list');
+            if (!sampleContainer) return;
+            sampleContainer.innerHTML = TRAINING_SAMPLES.map((item, idx) => {
+                const pastelClass = PASTEL_BG_CLASSES[idx % PASTEL_BG_CLASSES.length];
+                const sampleSrc = createProductVectorDataUrl(item.kind);
+                return `
+                    <button
+                        type="button"
+                        onclick="selectTrainingSample('${item.kind}', '${escapeHtml(item.label)}')"
+                        title="Gunakan sampel ${escapeHtml(item.label)}"
+                        class="h-10 rounded-lg ${pastelClass} border border-slate-200/80 hover:border-indigo-400 p-1 flex items-center justify-center transition-all"
+                    >
+                        <img src="${sampleSrc}" alt="${escapeHtml(item.label)}" class="max-h-full max-w-full object-contain">
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function syncStudioPreviewState() {
+            const imgEl = document.getElementById('studio-preview-img');
+            const placeholderEl = document.getElementById('studio-empty-placeholder');
+            const undoBtn = document.getElementById('btn-studio-undo');
+            const hasImage = Boolean(imgEl.getAttribute('src'));
+
+            if (hasImage) {
+                placeholderEl.classList.add('hidden');
+                imgEl.classList.remove('hidden');
+            } else {
+                placeholderEl.classList.remove('hidden');
+                imgEl.classList.add('hidden');
+            }
+
+            if (undoBtn) {
+                undoBtn.disabled = studioHistory.length === 0;
+            }
+
+            if (hasImage && activeStudioTab === 'crop') {
+                initCropperOnPreview();
+            } else {
+                destroyCropperInstance();
+            }
+        }
+
+        function setStudioImage(newSrc, recordHistory = false) {
+            const imgEl = document.getElementById('studio-preview-img');
+            const currentSrc = imgEl.getAttribute('src') || '';
+            if (recordHistory && currentSrc && currentSrc !== newSrc) {
+                studioHistory.push(currentSrc);
+            }
+            imgEl.setAttribute('src', newSrc || '');
+            syncStudioPreviewState();
+        }
+
+        function selectTrainingSample(kind, label) {
+            destroyCropperInstance();
+            const sampleDataUrl = createProductVectorDataUrl(kind);
+            if (!originalStudioImage) {
+                originalStudioImage = sampleDataUrl;
+            }
+            setStudioImage(sampleDataUrl, true);
+            showToast(`Sampel "${label}" dimuat ke Studio Foto.`, 'info');
+        }
+
+        function undoStudioImage() {
+            if (studioHistory.length === 0) return;
+            destroyCropperInstance();
+            const previousSrc = studioHistory.pop();
+            const imgEl = document.getElementById('studio-preview-img');
+            imgEl.setAttribute('src', previousSrc || '');
+            syncStudioPreviewState();
+            showToast('Perubahan terakhir dibatalkan (Undo).', 'info');
+        }
+
+        function switchStudioTab(tab) {
+            activeStudioTab = tab === 'bg' ? 'bg' : 'crop';
+            const cropTabBtn = document.getElementById('tab-studio-crop');
+            const bgTabBtn = document.getElementById('tab-studio-bg');
+            const cropPanel = document.getElementById('panel-studio-crop');
+            const bgPanel = document.getElementById('panel-studio-bg');
+
+            const activeTabStyle = 'bg-white text-slate-900 shadow-2xs';
+            const inactiveTabStyle = 'text-slate-600 hover:text-slate-900';
+
+            if (activeStudioTab === 'crop') {
+                cropTabBtn.className = `py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${activeTabStyle}`;
+                bgTabBtn.className = `py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${inactiveTabStyle}`;
+                cropPanel.classList.remove('hidden');
+                bgPanel.classList.add('hidden');
+                if (document.getElementById('studio-preview-img').getAttribute('src')) {
+                    initCropperOnPreview();
+                }
+            } else {
+                bgTabBtn.className = `py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${activeTabStyle}`;
+                cropTabBtn.className = `py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${inactiveTabStyle}`;
+                bgPanel.classList.remove('hidden');
+                cropPanel.classList.add('hidden');
+                destroyCropperInstance();
+            }
+        }
+
+        function initCropperOnPreview() {
+            const imgEl = document.getElementById('studio-preview-img');
+            if (!imgEl || !imgEl.getAttribute('src')) return;
+            destroyCropperInstance();
+
+            if (typeof Cropper !== 'undefined') {
+                cropperInstance = new Cropper(imgEl, {
+                    viewMode: 1,
+                    autoCropArea: 0.85,
+                    responsive: true,
+                    background: false
+                });
+            }
+        }
+
+        function destroyCropperInstance() {
+            if (cropperInstance) {
+                cropperInstance.destroy();
+                cropperInstance = null;
+            }
+        }
+
         function openProductModal(productId = null) {
-            cancelCropMode();
+            destroyCropperInstance();
+            studioHistory = [];
+            renderStudioSampleButtons();
+
             const modal = document.getElementById('product-modal');
             const title = document.getElementById('modal-title');
             const form = document.getElementById('product-form');
@@ -1309,6 +1587,7 @@
 
             form.reset();
             document.getElementById('prod-image-input').value = '';
+            document.getElementById('prod-wa').value = defaultWa;
 
             if (productId) {
                 const product = getProducts().find(p => p.id === productId);
@@ -1321,23 +1600,25 @@
                 document.getElementById('prod-price').value = product.price;
                 document.getElementById('prod-wa').value = normalizeWaNumber(product.wa || defaultWa);
                 document.getElementById('prod-desc').value = product.desc;
-                originalStudioImage = product.image;
-                document.getElementById('studio-preview-img').src = product.image;
+                originalStudioImage = product.image || '';
+                document.getElementById('studio-preview-img').setAttribute('src', originalStudioImage);
             } else {
                 title.textContent = 'Tambah Produk Baru';
                 document.getElementById('prod-id').value = '';
-                document.getElementById('prod-wa').value = defaultWa;
-                const defaultNewImg = 'https://placehold.co/600x450/eef2ff/4f46e5?text=Foto+Produk';
-                originalStudioImage = defaultNewImg;
-                document.getElementById('studio-preview-img').src = defaultNewImg;
+                originalStudioImage = '';
+                document.getElementById('studio-preview-img').setAttribute('src', '');
             }
+
+            switchStudioTab('crop');
+            syncStudioPreviewState();
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
 
         function closeProductModal() {
-            cancelCropMode();
+            destroyCropperInstance();
+            studioHistory = [];
             const modal = document.getElementById('product-modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
@@ -1346,55 +1627,56 @@
         function handleImageUpload(event) {
             const file = event.target.files?.[0];
             if (!file) return;
-            cancelCropMode();
+            destroyCropperInstance();
 
             const reader = new FileReader();
             reader.onload = function(e) {
-                originalStudioImage = e.target.result;
-                document.getElementById('studio-preview-img').src = e.target.result;
-                showToast('Foto dimuat ke Studio Foto.', 'info');
+                const dataUrl = e.target.result;
+                if (!originalStudioImage) {
+                    originalStudioImage = dataUrl;
+                }
+                setStudioImage(dataUrl, true);
+                showToast('Foto berhasil diunggah ke Studio Foto.', 'info');
             };
             reader.readAsDataURL(file);
         }
 
         function resetStudioImage() {
-            cancelCropMode();
+            destroyCropperInstance();
             if (originalStudioImage) {
-                document.getElementById('studio-preview-img').src = originalStudioImage;
-                showToast('Foto dikembalikan ke awal.', 'info');
+                setStudioImage(originalStudioImage, true);
+                showToast('Foto dikembalikan ke gambar awal.', 'info');
+            } else {
+                studioHistory = [];
+                document.getElementById('studio-preview-img').setAttribute('src', '');
+                syncStudioPreviewState();
+                showToast('Area pratinjau dikosongkan.', 'info');
             }
         }
 
-        function startCropMode() {
-            const imgEl = document.getElementById('studio-preview-img');
-            if (!imgEl.src) return;
-            if (cropperInstance) cropperInstance.destroy();
-
-            cropperInstance = new Cropper(imgEl, {
-                viewMode: 1,
-                autoCropArea: 0.85,
-                responsive: true,
-                background: false
-            });
-
-            document.getElementById('crop-controls').classList.remove('hidden');
-            document.getElementById('bg-remove-controls').classList.add('hidden');
-        }
-
         function setCropAspect(ratio) {
+            if (!cropperInstance && document.getElementById('studio-preview-img').getAttribute('src')) {
+                initCropperOnPreview();
+            }
             if (cropperInstance) {
                 cropperInstance.setAspectRatio(ratio);
             }
         }
 
         function rotateCropper(deg) {
+            if (!cropperInstance && document.getElementById('studio-preview-img').getAttribute('src')) {
+                initCropperOnPreview();
+            }
             if (cropperInstance) {
                 cropperInstance.rotate(deg);
             }
         }
 
         function applyCrop() {
-            if (!cropperInstance) return;
+            if (!cropperInstance) {
+                showToast('Pilih atau unggah foto terlebih dahulu sebelum melakukan crop.', 'error');
+                return;
+            }
             const canvas = cropperInstance.getCroppedCanvas({
                 maxWidth: 1024,
                 maxHeight: 1024,
@@ -1402,28 +1684,22 @@
                 imageSmoothingQuality: 'high'
             });
             if (canvas) {
-                document.getElementById('studio-preview-img').src = canvas.toDataURL('image/png');
+                const croppedDataUrl = canvas.toDataURL('image/png');
+                destroyCropperInstance();
+                setStudioImage(croppedDataUrl, true);
                 showToast('Hasil crop diterapkan!', 'success');
             }
-            cancelCropMode();
         }
-
-        function cancelCropMode() {
-            if (cropperInstance) {
-                cropperInstance.destroy();
-                cropperInstance = null;
-            }
-            document.getElementById('crop-controls').classList.add('hidden');
-            document.getElementById('bg-remove-controls').classList.remove('hidden');
-        }
-
-        document.getElementById('bg-tolerance').addEventListener('input', function(e) {
-            document.getElementById('bg-tolerance-val').textContent = e.target.value;
-        });
 
         function autoRemoveBackground() {
-            cancelCropMode();
+            destroyCropperInstance();
             const imgEl = document.getElementById('studio-preview-img');
+            const currentSrc = imgEl.getAttribute('src');
+            if (!currentSrc) {
+                showToast('Pilih atau unggah foto terlebih dahulu.', 'error');
+                return;
+            }
+
             const tolerance = Number(document.getElementById('bg-tolerance').value) || 42;
 
             const tempImg = new Image();
@@ -1530,29 +1806,30 @@
                     }
 
                     ctx.putImageData(imgData, 0, 0);
-                    imgEl.src = canvas.toDataURL('image/png');
+                    setStudioImage(canvas.toDataURL('image/png'), true);
                     showToast('Background berhasil dihapus secara otomatis!', 'success');
                 } catch (err) {
-                    showToast('Gagal memproses gambar lintas domain. Coba upload file langsung.', 'error');
+                    showToast('Gagal memproses gambar. Coba upload file langsung.', 'error');
                 }
             };
             tempImg.onerror = function() {
-                showToast('Gagal memuat gambar.', 'error');
+                showToast('Gagal memuat gambar untuk dihapus background-nya.', 'error');
             };
-            tempImg.src = imgEl.src;
+            tempImg.src = currentSrc;
         }
 
         document.getElementById('product-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            cancelCropMode();
+            destroyCropperInstance();
 
             const idInput = document.getElementById('prod-id').value.trim();
             const name = document.getElementById('prod-name').value.trim();
             const category = document.getElementById('prod-category').value.trim();
             const price = Number(document.getElementById('prod-price').value) || 0;
-            const wa = normalizeWaNumber(document.getElementById('prod-wa').value);
+            const wa = normalizeWaNumber(document.getElementById('prod-wa').value || getContactSettings().wa);
             const desc = document.getElementById('prod-desc').value.trim();
-            const image = document.getElementById('studio-preview-img').src;
+            const currentSrc = document.getElementById('studio-preview-img').getAttribute('src');
+            const image = currentSrc || 'https://placehold.co/600x450/eef2ff/4f46e5?text=NusantaraStore';
 
             const products = getProducts();
             if (idInput) {
@@ -1568,7 +1845,7 @@
                         image,
                         isIllustration: false
                     };
-                    showToast('Produk berhasil diperbarui!', 'success');
+                    showToast('Produk berhasil diperbarui di katalog!', 'success');
                 }
             } else {
                 products.unshift({
@@ -1581,7 +1858,7 @@
                     image,
                     isIllustration: false
                 });
-                showToast('Produk baru berhasil ditambahkan!', 'success');
+                showToast('Produk baru berhasil disimpan ke katalog!', 'success');
             }
 
             saveProducts(products);
